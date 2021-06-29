@@ -1,6 +1,7 @@
 package br.com.zupacademy.gian.casadocodigo.request;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,20 +12,22 @@ public class NovoAutorRequest {
 
 	@NotNull
 	@NotEmpty
+	@NotBlank
 	private String nome;
 
 	@NotNull
 	@NotEmpty
 	@Email
+	@NotBlank
 	private String email;
 
 	@NotNull
 	@NotEmpty
 	@Size(max = 400)
+	@NotBlank
 	private String descricao;
 
-	public NovoAutorRequest(@NotNull @NotEmpty String nome, @NotNull @NotEmpty @Email String email,
-			@NotNull @NotEmpty @Size(max = 400) String descricao) {
+	public NovoAutorRequest(String nome, String email, String descricao) {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;

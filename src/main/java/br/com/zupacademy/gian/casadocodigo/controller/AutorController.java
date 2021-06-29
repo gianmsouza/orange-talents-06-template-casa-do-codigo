@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,10 +35,10 @@ public class AutorController {
 
 	@PostMapping
 	@Transactional
-	public NovoAutorResponse cadastrar(@RequestBody @Valid NovoAutorRequest request) {		
+	public ResponseEntity<NovoAutorResponse> cadastrar(@RequestBody @Valid NovoAutorRequest request) {		
 		Autor autor = request.toModel();		
 		autorRepository.save(autor);
 		
-		return new NovoAutorResponse(autor);
+		return ResponseEntity.ok(new NovoAutorResponse(autor));
 	}
 }
