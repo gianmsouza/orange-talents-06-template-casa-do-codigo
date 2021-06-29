@@ -1,16 +1,14 @@
 package br.com.zupacademy.gian.casadocodigo.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import br.com.zupacademy.gian.casadocodigo.model.Categoria;
+import br.com.zupacademy.gian.casadocodigo.validator.UniqueValue;
 
 public class NovaCategoriaRequest {
-
-	@NotNull
-	@NotEmpty
+	
 	@NotBlank
+	@UniqueValue(domainClass = Categoria.class, fieldName = "nome", message = "Categoria já cadastrada")
 	private String nome;
 	
 	@Deprecated

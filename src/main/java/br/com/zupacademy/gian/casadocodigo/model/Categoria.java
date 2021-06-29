@@ -19,18 +19,17 @@ public class Categoria {
 	private String nome;
 	
 	@Deprecated
-	public Categoria() {
-		
+	public Categoria() {		
 	}
 
 	public Categoria(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}

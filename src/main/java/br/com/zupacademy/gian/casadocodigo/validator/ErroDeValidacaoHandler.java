@@ -1,4 +1,4 @@
-package br.com.zupacademy.gian.casadocodigo.config;
+package br.com.zupacademy.gian.casadocodigo.validator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,27 +2,21 @@ package br.com.zupacademy.gian.casadocodigo.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.zupacademy.gian.casadocodigo.model.Autor;
+import br.com.zupacademy.gian.casadocodigo.validator.UniqueValue;
 
 public class NovoAutorRequest {
-
-	@NotNull
-	@NotEmpty
+	
 	@NotBlank
-	private String nome;
-
-	@NotNull
-	@NotEmpty
+	private String nome;	
+	
 	@Email
 	@NotBlank
-	private String email;
-
-	@NotNull
-	@NotEmpty
+	@UniqueValue(domainClass = Autor.class, fieldName = "email", message = "Email já cadastrado")
+	private String email;	
+	
 	@Size(max = 400)
 	@NotBlank
 	private String descricao;
