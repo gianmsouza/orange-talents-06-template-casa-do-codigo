@@ -1,5 +1,7 @@
 package br.com.zupacademy.gian.casadocodigo.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -7,14 +9,17 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zupacademy.gian.casadocodigo.model.ListaLivroIdTituloProjecao;
 import br.com.zupacademy.gian.casadocodigo.model.Livro;
 import br.com.zupacademy.gian.casadocodigo.repository.LivroRepository;
 import br.com.zupacademy.gian.casadocodigo.request.NovoLivroRequest;
+import br.com.zupacademy.gian.casadocodigo.response.ListaLivrosIdTituloResponse;
 import br.com.zupacademy.gian.casadocodigo.response.NovoLivroResponse;
 
 @RestController
@@ -31,13 +36,17 @@ public class LivroController {
 	@Transactional
 	public ResponseEntity<NovoLivroResponse> cadastrar(@RequestBody @Valid NovoLivroRequest request) {	
 		
-		System.out.println(request.getTitulo());
-		
 		Livro livro = request.toModel(manager);
 		
 		livroRepository.save(livro);
 		
 		return ResponseEntity.ok(new NovoLivroResponse(livro));
 	}
-
+	
+	@GetMapping
+	public List<ListaLivrosIdTituloResponse> listaLivrosIdTitulo() {
+		List<ListaLivroIdTituloProjecao> listaLivrosProjecao = livroRepository.findLivrosIdAndTitulo();		
+		
+		return ListaLivrosIdTituloResponse.converter(listaLivrosProjecao);
+	}
 }
