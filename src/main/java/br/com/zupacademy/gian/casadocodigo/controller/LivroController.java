@@ -60,7 +60,7 @@ public class LivroController {
 		if (livro.isPresent()) {
 			return ResponseEntity.ok(new DetalhesLivroResponse(livro.get()));
 		}
-		
+			
 		return ResponseEntity.notFound().build();
 	}
 }
